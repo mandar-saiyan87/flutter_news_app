@@ -73,29 +73,36 @@ class _BreakingNews extends StatelessWidget {
                 return Container(
                   margin: EdgeInsets.only(right: 20),
                   width: MediaQuery.of(context).size.width * 0.5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ImageContainer(
-                          imgUrl: articles[index].imgUrl,
-                          width: MediaQuery.of(context).size.width * 0.5),
-                      SizedBox(height: 10),
-                      Text(
-                        articles[index].title,
-                        maxLines: 2,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(fontWeight: FontWeight.bold, height: 1.5),
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                          '${DateTime.now().difference(articles[index].createdAt).inHours} hours ago',
-                          style: Theme.of(context).textTheme.bodySmall),
-                      SizedBox(height: 5),
-                      Text('by ${articles[index].author}',
-                          style: Theme.of(context).textTheme.bodySmall),
-                    ],
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/article',
+                          arguments: articles[index]);
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ImageContainer(
+                            imgUrl: articles[index].imgUrl,
+                            width: MediaQuery.of(context).size.width * 0.5),
+                        SizedBox(height: 10),
+                        Text(
+                          articles[index].title,
+                          maxLines: 2,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  fontWeight: FontWeight.bold, height: 1.5),
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                            '${DateTime.now().difference(articles[index].createdAt).inHours} hours ago',
+                            style: Theme.of(context).textTheme.bodySmall),
+                        SizedBox(height: 5),
+                        Text('by ${articles[index].author}',
+                            style: Theme.of(context).textTheme.bodySmall),
+                      ],
+                    ),
                   ),
                 );
               }),
